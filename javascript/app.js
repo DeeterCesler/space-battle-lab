@@ -21,30 +21,33 @@ const generateAlienShips = (num) =>{
         aliens.push(alienShip);
     }
 }
-generateAlienShips(6);
-const retreat = (input) => {
-    if (input === 'yes'){
-        return true;
-    } 
-}
+generateAlienShips(10);
+
+// let choice = Window.prompt("retreat? answer y/n");
 const battle = (fighter1, fighter2) => {
     while(fighter1.hull > 0 && fighter2.hull > 0){
+        let round = 1;
         fighter1.attack(fighter2);
         console.log(`enemy hull is: ${fighter2.hull}`);
         if(fighter2.hull > 0){
             fighter2.attack(fighter1); 
+        } if (fighter1.hull < 0){
+            console.log('Haha, you died');
+            return;
         }
+        
         console.log(`Your hull is: ${fighter1.hull}`);
-        console.log('round end');    
+        console.log(`round ${round} end`);  
+        round ++; 
     }
     console.log(`ENEMY KILLED`);
     console.log('');
 }
 for (let i = 0; i < aliens.length; i++) {
     battle(USSAssembly, aliens[i]);
-    if (retreat(propmt('retreat? yes or no.'))){
-        return;
-    }
+    // if (choice === 'y'){
+    //     return;
+    // }
 }
 
 
